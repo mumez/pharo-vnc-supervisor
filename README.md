@@ -1,4 +1,4 @@
-pharo-vnc-supervisord
+pharo-vnc-supervisor
 ========
 
 A Docker image for [Pharo Smalltalk](http://www.pharo-project.org/ "Pharo"). Especially suitable for web application development and delivery.
