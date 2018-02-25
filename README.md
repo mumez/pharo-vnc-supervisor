@@ -7,29 +7,43 @@ A Docker image for [Pharo Smalltalk](http://www.pharo-project.org/ "Pharo"). Esp
 - Debuggable via VNC.
 - Web browsers (Firefox and Chronium) are installed.
 
-
 ## Usages ##
 
 ```bash
-docker run -d -p 5901:5901 -p 6901:6901 mumez/pharo-vnc-supervisor
+docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 mumez/pharo-vnc-supervisor
 ```
 
-You can access the running pharo image via VNC client (the default password is 'vncpassword').
+You can access the running pharo image via VNC client or web browser.
+(the default password is 'vncpassword')
 
-For web browser: `http://localhost:6901/?password=vncpassword`
+- VNC client:  `yourhost:5901`
+- Web browser: `http://yourhost:6901/?password=vncpassword`
+
+### How to start with a customized Pharo image
+
+1. Place your customized Pharo image to your docker-host data directory (For example, `$HOME/docker/pharo/data`).
+2. Use `docker run` `-v` option to mount the data direcotry.
+
+```bash
+docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 \
+	-v=$HOME/docker/pharo/data:/root/data \
+	mumez/pharo-vnc-supervisor
+```
 
 ## Settings ##
 
 You can change these settings via `docker run` `-e` option.
 
 ### Pharo related environment variables
-```
+
+```bash
 PHARO_SUPERVISOR_LOG_NAME=pharo-supervisord.log
 PHARO_IMAGE_VERSION=61
 PHARO_IMAGE=Pharo.image
 PHARO_START_SCRIPT=
 PHARO_MODE=gui
 ```
+
 ### VNC related environment variables
 
 Please see [ubuntu-icewm-vnc]
