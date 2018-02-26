@@ -30,6 +30,15 @@ docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 \
 	mumez/pharo-vnc-supervisor
 ```
 
+### How to change default Pharo image version 
+
+By default, Pharo 6.1 will be installed to the docker image. You can specify other versions when building a docker image.
+
+```bash
+docker build -t pharo70-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=70 .
+docker run --name my_pharo70 -d -p 5901:5901 -p 6901:6901 pharo70-vnc-supervisor
+```
+
 ## Settings ##
 
 You can change these settings via `docker run` `-e` option.
@@ -38,7 +47,6 @@ You can change these settings via `docker run` `-e` option.
 
 ```bash
 PHARO_SUPERVISOR_LOG_NAME=pharo-supervisord.log
-PHARO_IMAGE_VERSION=61
 PHARO_IMAGE=Pharo.image
 PHARO_START_SCRIPT=
 PHARO_MODE=gui
@@ -46,6 +54,4 @@ PHARO_MODE=gui
 
 ### VNC related environment variables
 
-Please see [ubuntu-icewm-vnc]
-(https://hub.docker.com/r/consol/ubuntu-icewm-vnc/).
-
+Please see [ubuntu-icewm-vnc](https://hub.docker.com/r/consol/ubuntu-icewm-vnc/).

@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 # --------------------
 # Pharo
 # --------------------
-ENV PHARO_IMAGE_VERSION=61
+ARG PHARO_IMAGE_VERSION=61
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ENV PHARO_START_SCRIPT=''
@@ -61,7 +61,7 @@ COPY pharo-supervisord.conf /etc/supervisor/conf.d/pharo-supervisord.conf
 # --------------------
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
-ENV TZ='Asia/Tokyo'
+ARG TZ='Asia/Tokyo'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # --------------------
