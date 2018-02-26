@@ -44,7 +44,7 @@ RUN chmod +x /usr/local/bin/setup.sh
 # --------------------
 WORKDIR /root/data
 
-RUN cp /usr/local/bin/pharo/Pharo.* /root/data
+RUN cp /usr/local/bin/pharo/Pharo*.* /root/data
 
 VOLUME [ "/root/data" ]
 
