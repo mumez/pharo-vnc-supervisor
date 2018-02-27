@@ -11,13 +11,13 @@ if [ "$PHARO_MODE" == "gui" ]; then
     if [ -z "$PHARO_START_SCRIPT" ]; then
         pharo-ui $PHARO_IMAGE
     else
-        pharo-ui $PHARO_IMAGE --eval "$PHARO_START_SCRIPT"
+        pharo-ui $PHARO_IMAGE -e "$PHARO_START_SCRIPT"
     fi
 else
     echo "Launch Pharo in non-gui mode"
     if [ -z "$PHARO_START_SCRIPT" ]; then
         pharo -vm-display-null $PHARO_IMAGE --no-quit
     else
-        pharo -vm-display-null $PHARO_IMAGE --no-quit --eval "$PHARO_START_SCRIPT"
+        pharo -vm-display-null $PHARO_IMAGE --no-quit -e "$PHARO_START_SCRIPT"
     fi
 fi
