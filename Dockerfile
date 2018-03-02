@@ -36,6 +36,8 @@ ENV PATH="/usr/local/bin/pharo:${PATH}"
 # --------------------
 ADD ./launch-pharo.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/launch-pharo.sh
+ADD ./save-pharo.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/save-pharo.sh
 ADD ./setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/setup.sh
 
