@@ -30,6 +30,31 @@ docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 \
 	mumez/pharo-vnc-supervisor
 ```
 
+### How to build a customized Pharo image in a container
+
+You can use `save-pharo` command to build a customized Pharo image.
+
+#### Install from Catalog
+`save-pharo get <Project name>`
+
+```bash
+docker run --rm -p 5901:5901 -p 6901:6901 \
+	-v=$HOME/docker/pharo/data:/root/data \
+	mumez/pharo-vnc-supervisor \
+	save-pharo get Tarantube
+```
+
+#### Install by Configuration
+`save-pharo config <Metacello configuration>`
+
+```bash
+docker run --rm -p 5901:5901 -p 6901:6901 \
+	-v=$HOME/docker/pharo/data:/root/data \
+	mumez/pharo-vnc-supervisor \
+	save-pharo config http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main/ \
+	ConfigurationOfNeo4reSt --install=stable
+```
+
 ### How to change default Pharo image version 
 
 By default, Pharo 6.1 will be installed to the docker image. You can specify other versions when building a docker image.

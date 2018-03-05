@@ -35,9 +35,10 @@ ENV PATH="/usr/local/bin/pharo:${PATH}"
 # Setup scripts
 # --------------------
 ADD ./launch-pharo.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/launch-pharo.sh
+ADD ./save-pharo.sh /usr/local/bin/
 ADD ./setup.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/setup.sh
+ADD ./docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
 
 # --------------------
 # Workspace
@@ -67,4 +68,5 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # --------------------
 # ENTRYPOINT
 # --------------------
-ENTRYPOINT [ "/bin/bash", "-l", "-c", "/usr/local/bin/setup.sh && /usr/bin/supervisord -n" ]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["supervisord"]
