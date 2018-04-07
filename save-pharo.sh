@@ -10,6 +10,7 @@ fi
 
 BLDDIR=$HOME/build
 mkdir -p $BLDDIR
+cp -f $BASEDIR/*.sources $BLDDIR
 cp -f $BASEDIR/$PHARO_IMAGE $BLDDIR
 cp -f $BASEDIR/$PHARO_CHANGE $BLDDIR
 cd $BLDDIR
