@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 # --------------------
 # Pharo
 # --------------------
-ARG PHARO_IMAGE_VERSION=61
+ARG PHARO_IMAGE_VERSION=70
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ENV PHARO_START_SCRIPT=''
