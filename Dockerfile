@@ -48,6 +48,8 @@ RUN chmod +x /usr/local/bin/*
 WORKDIR /root/data
 
 RUN cp /usr/local/bin/pharo/Pharo*.* /root/data
+RUN ln -s $HOME/.config/pharo /root/data/config
+ADD ./config/default-startup.st /root/data/config/
 
 VOLUME [ "/root/data" ]
 
