@@ -7,6 +7,8 @@ USER 0
 ## Install prerequisites
 RUN apt-get update && apt-get install -y \
     software-properties-common \
+    libcurl4-openssl-dev \
+    libssh2-1 \
     python-software-properties \
     supervisor \
     && rm -rf /var/lib/apt/lists/*
