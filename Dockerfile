@@ -20,12 +20,14 @@ ARG PHARO_IMAGE_VERSION=70
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ENV PHARO_START_SCRIPT=''
+ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
+ENV PHARO_HOME=${PHARO_DEFAULT_IMAGE_DIR}
 
 RUN mkdir pharo && cd pharo \
   && apt-get update && apt-get install -y --no-install-recommends \
     curl \
     unzip \
-  && curl https://get.pharo.org/64/$PHARO_IMAGE_VERSION+vm | bash \
+  && curl https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
   && mv ../pharo /usr/local/bin/ \
   && apt-get remove -y \
     unzip \
@@ -45,13 +47,13 @@ RUN chmod +x /usr/local/bin/*
 # --------------------
 # Workspace
 # --------------------
-WORKDIR /root/data
+WORKDIR ${PHARO_DEFAULT_IMAGE_DIR}
 
-RUN cp /usr/local/bin/pharo/Pharo*.* /root/data
-RUN ln -s $HOME/.config/pharo /root/data/config
-ADD ./config/default-startup.st /root/data/config/
+RUN cp /usr/local/bin/pharo/Pharo*.* ${PHARO_DEFAULT_IMAGE_DIR}
+RUN ln -s ${HOME}/.config/pharo ${PHARO_DEFAULT_IMAGE_DIR}/config
+ADD ./config/default-startup.st ${PHARO_DEFAULT_IMAGE_DIR}/config/
 
-VOLUME [ "/root/data" ]
+VOLUME [ ${PHARO_DEFAULT_IMAGE_DIR} ]
 
 EXPOSE 9000
 
