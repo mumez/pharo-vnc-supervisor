@@ -89,8 +89,8 @@ docker run --rm -p 5901:5901 -p 6901:6901 \
 By default, Pharo 7.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
-docker build -t pharo70-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=70 .
-docker run --name my_pharo70 -d -p 5901:5901 -p 6901:6901 pharo70-vnc-supervisor
+docker build -t pharo80-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=80 .
+docker run --name my_pharo80 -d -p 5901:5901 -p 6901:6901 pharo80-vnc-supervisor
 ```
 
 ## Settings
