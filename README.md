@@ -61,6 +61,16 @@ docker run --rm -p 5901:5901 -p 6901:6901 \
 	save-pharo config http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main/ \
 	ConfigurationOfNeo4reSt --install=stable
 ```
+#### Install by Metacello
+`save-pharo metacello <metacello command-line arguments>`
+
+```bash
+REPOS_URL=github://quentinplessis/Teamtalk/pharo-repository
+docker run --rm -p 5901:5901 -p 6901:6901 \
+	-v=$HOME/docker/pharo/data:/root/data \
+	mumez/pharo-vnc-supervisor \
+	save-pharo metacello install $REPOS_URL BaselineOfTeamtalk
+```
 
 #### Install by Metacello (only available in Pharo 7+)
 
@@ -76,7 +86,7 @@ docker run --rm -p 5901:5901 -p 6901:6901 \
 
 ### How to change default Pharo image version 
 
-By default, Pharo 6.1 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 7.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
 docker build -t pharo70-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=70 .
