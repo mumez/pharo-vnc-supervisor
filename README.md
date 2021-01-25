@@ -44,12 +44,13 @@ You can use `save-pharo` command to build a customized Pharo image.
 `save-pharo metacello <metacello command-line arguments>`
 
 ```bash
-REPOS_URL=github://quentinplessis/Teamtalk/pharo-repository
+REPOS_URL=github://mumez/Tarantalk/repository
 docker run --rm -p 5901:5901 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
-	save-pharo metacello install $REPOS_URL BaselineOfTeamtalk
+	save-pharo metacello install $REPOS_URL BaselineOfTarantalk
 ```
+
 #### Install by Configuration
 
 `save-pharo config <Metacello configuration>`
@@ -79,7 +80,7 @@ By default, Pharo 8.0 will be installed to the docker image. You can specify oth
 
 ```bash
 docker build -t pharo90-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=90 .
-docker run --name my_pharo90 -d -p 5901:5901 -p 6901:6901 pharo80-vnc-supervisor
+docker run --name my_pharo90 -d -p 5901:5901 -p 6901:6901 pharo90-vnc-supervisor
 ```
 
 ## Settings
