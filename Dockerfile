@@ -1,9 +1,6 @@
 FROM mumez/ubuntu-vnc-supervisor
 LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
-## Change to root
-USER 0
-
 ## Install prerequisites and utilities
 RUN apt-get update && apt-get install -y \
     libssl1.0.0 \
