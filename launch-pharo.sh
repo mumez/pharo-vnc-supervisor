@@ -9,9 +9,9 @@ echo "PHARO_START_SCRIPT: '$PHARO_START_SCRIPT'"
 if [ "$PHARO_MODE" == "gui" ]; then
     echo "Launch Pharo in GUI mode"
     if [ -z "$PHARO_START_SCRIPT" ]; then
-        pharo-ui $PHARO_IMAGE
+        DISPLAY=:0 pharo-ui $PHARO_IMAGE
     else
-        pharo-ui $PHARO_IMAGE -e "$PHARO_START_SCRIPT"
+        DISPLAY=:0 pharo-ui $PHARO_IMAGE -e "$PHARO_START_SCRIPT"
     fi
 else
     echo "Launch Pharo in non-gui mode"

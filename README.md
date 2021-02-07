@@ -9,13 +9,13 @@ A Docker image for [Pharo Smalltalk](http://www.pharo-project.org/ "Pharo"). Esp
 ## Usages
 
 ```bash
-docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 mumez/pharo-vnc-supervisor
+docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 mumez/pharo-vnc-supervisor
 ```
 
 You can access the running pharo image via VNC client or web browser.
 (the default password is 'vncpassword')
 
-- VNC client:  `yourhost:5901`
+- VNC client:  `yourhost:5900`
 - Web browser: `http://yourhost:6901/?password=vncpassword`
 
 ### How to start with a customized Pharo image
@@ -24,7 +24,7 @@ You can access the running pharo image via VNC client or web browser.
 2. Use `docker run` `-v` option to mount the data direcotry.
 
 ```bash
-docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 \
+docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor
 ```
@@ -32,7 +32,7 @@ docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 \
 Currently for Pharo 7.0, there is also 'pharo70' tag maintained. So you can just specify the tag:
 
 ```bash
-docker run --name my_pharo -d -p 5901:5901 -p 6901:6901 mumez/pharo-vnc-supervisor:pharo70
+docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 mumez/pharo-vnc-supervisor:pharo70
 ```
 
 ### How to build a customized Pharo image in a container
@@ -45,7 +45,7 @@ You can use `save-pharo` command to build a customized Pharo image.
 
 ```bash
 REPOS_URL=github://mumez/Tarantalk/repository
-docker run --rm -p 5901:5901 -p 6901:6901 \
+docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
 	save-pharo metacello install $REPOS_URL BaselineOfTarantalk
@@ -56,7 +56,7 @@ docker run --rm -p 5901:5901 -p 6901:6901 \
 `save-pharo config <Metacello configuration>`
 
 ```bash
-docker run --rm -p 5901:5901 -p 6901:6901 \
+docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
 	save-pharo config http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main/ \
@@ -68,7 +68,7 @@ docker run --rm -p 5901:5901 -p 6901:6901 \
 `save-pharo get <Project name>`
 
 ```bash
-docker run --rm -p 5901:5901 -p 6901:6901 \
+docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
 	save-pharo get Tarantube
@@ -80,7 +80,7 @@ By default, Pharo 8.0 will be installed to the docker image. You can specify oth
 
 ```bash
 docker build -t pharo90-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=90 .
-docker run --name my_pharo90 -d -p 5901:5901 -p 6901:6901 pharo90-vnc-supervisor
+docker run --name my_pharo90 -d -p 5900:5900 -p 6901:6901 pharo90-vnc-supervisor
 ```
 
 ## Settings
