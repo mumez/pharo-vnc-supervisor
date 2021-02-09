@@ -14,9 +14,9 @@ ENV DISPLAY=:0
 ARG PHARO_IMAGE_VERSION=80
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
-ENV PHARO_START_SCRIPT=''
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
 ENV PHARO_HOME=${PHARO_DEFAULT_IMAGE_DIR}
+ENV PHARO_START_SCRIPT=${PHARO_DEFAULT_IMAGE_DIR}/config/default-startup.st
 
 RUN mkdir pharo && cd pharo \
   && apt-get update && apt-get install -y --no-install-recommends \
@@ -45,7 +45,6 @@ RUN chmod +x /usr/local/bin/*
 WORKDIR ${PHARO_DEFAULT_IMAGE_DIR}
 
 RUN cp /usr/local/bin/pharo/Pharo*.* ${PHARO_DEFAULT_IMAGE_DIR}
-RUN ln -s ${HOME}/.config/pharo ${PHARO_DEFAULT_IMAGE_DIR}/config
 ADD ./config/default-startup.st ${PHARO_DEFAULT_IMAGE_DIR}/config/
 
 VOLUME [ ${PHARO_DEFAULT_IMAGE_DIR} ]

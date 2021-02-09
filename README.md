@@ -29,12 +29,6 @@ docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 \
 	mumez/pharo-vnc-supervisor
 ```
 
-Currently for Pharo 7.0, there is also 'pharo70' tag maintained. So you can just specify the tag:
-
-```bash
-docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 mumez/pharo-vnc-supervisor:pharo70
-```
-
 ### How to build a customized Pharo image in a container
 
 You can use `save-pharo` command to build a customized Pharo image.
