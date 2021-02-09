@@ -98,4 +98,4 @@ PHARO_MODE=gui
 
 ### VNC related environment variables
 
-Please see [ubuntu-icewm-vnc](https://hub.docker.com/r/consol/ubuntu-icewm-vnc/).
+Please see [ubuntu-vnc-supervisor](https://github.com/mumez/ubuntu-vnc-supervisor).
