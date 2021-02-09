@@ -8,5 +8,5 @@ fi
 # supervisor log file
 mkdir -p $PHARO_HOME/logs && touch $PHARO_HOME/logs/$PHARO_SUPERVISOR_LOG_NAME
 
-# vnc
-/bin/bash /dockerstartup/vnc_startup.sh &
+# start base environments
+/usr/local/bin/setup-envs-all.sh &

@@ -1,21 +1,16 @@
-FROM consol/ubuntu-icewm-vnc
+FROM mumez/ubuntu-vnc-supervisor
 LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
-## Change to root
-USER 0
-
-## Install prerequisites
+## Install prerequisites and utilities
 RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    libcurl4-openssl-dev \
-    libssh2-1 \
-    python-software-properties \
-    supervisor \
+    libssl1.0.0 \
+    libaudio2 \
     && rm -rf /var/lib/apt/lists/*
 
 # --------------------
 # Pharo
 # --------------------
+ENV DISPLAY=:0 
 ARG PHARO_IMAGE_VERSION=80
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
@@ -62,14 +57,6 @@ EXPOSE 9000
 # --------------------
 ENV PHARO_SUPERVISOR_LOG_NAME=pharo-supervisord.log
 COPY pharo-supervisord.conf /etc/supervisor/conf.d/pharo-supervisord.conf
-
-# --------------------
-# Locale
-# --------------------
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-ARG TZ='Asia/Tokyo'
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # --------------------
 # ENTRYPOINT
