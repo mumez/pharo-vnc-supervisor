@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=80
+ARG PHARO_IMAGE_VERSION=90
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
@@ -47,7 +47,7 @@ WORKDIR ${PHARO_DEFAULT_IMAGE_DIR}
 RUN cp /usr/local/bin/pharo/Pharo*.* ${PHARO_DEFAULT_IMAGE_DIR}
 ADD ./config/default-startup.st ${PHARO_DEFAULT_IMAGE_DIR}/config/
 
-VOLUME [ ${PHARO_DEFAULT_IMAGE_DIR} ]
+VOLUME ${PHARO_DEFAULT_IMAGE_DIR}
 
 EXPOSE 9000
 
