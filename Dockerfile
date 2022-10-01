@@ -3,7 +3,7 @@ LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
 ## Install prerequisites and utilities
 RUN apt-get update && apt-get install -y \
-    libssl1.0.0 \
+    libssl1.1 \
     libaudio2 \
     && rm -rf /var/lib/apt/lists/*
 
