@@ -5,13 +5,14 @@ LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 RUN apt-get update && apt-get install -y \
     libssl1.1 \
     libaudio2 \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # --------------------
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=90
+ARG PHARO_IMAGE_VERSION=110
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
