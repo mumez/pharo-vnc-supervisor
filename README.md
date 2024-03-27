@@ -57,7 +57,7 @@ docker run --rm -p 5900:5900 -p 6901:6901 \
 	ConfigurationOfNeo4reSt --install=stable
 ```
 
-#### Install from Catalog (Obsolete - only available in Pharo 6)
+#### Install from Catalog (Obsolete - available before Pharo 6)
 
 `save-pharo get <Project name>`
 
@@ -70,11 +70,11 @@ docker run --rm -p 5900:5900 -p 6901:6901 \
 
 ### How to change default Pharo image version 
 
-By default, Pharo 9.0 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 11.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
-docker build -t pharo100-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=100 .
-docker run --name my_pharo100 -d -p 5900:5900 -p 6901:6901 pharo100-vnc-supervisor
+docker build -t pharo120-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=120 .
+docker run --name my_pharo120 -d -p 5900:5900 -p 6901:6901 pharo120-vnc-supervisor
 ```
 
 ## Settings
