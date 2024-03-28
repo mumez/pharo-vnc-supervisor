@@ -4,7 +4,6 @@ A Docker image for [Pharo Smalltalk](http://www.pharo-project.org/ "Pharo"). Esp
 
 - Pharo process is daemonized by supervisord.
 - Debuggable via VNC.
-- Web browsers (Firefox and Chronium) are installed.
 
 ## Usages
 
