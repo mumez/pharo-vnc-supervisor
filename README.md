@@ -14,7 +14,7 @@ docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 mumez/pharo-vnc-supervis
 You can access the running pharo image via VNC client or web browser.
 (the default password is 'vncpassword')
 
-- VNC client:  `yourhost:5900`
+- VNC client: `yourhost:5900`
 - Web browser: `http://yourhost:6901/?password=vncpassword`
 
 ### How to start with a customized Pharo image
@@ -67,13 +67,13 @@ docker run --rm -p 5900:5900 -p 6901:6901 \
 	save-pharo get Tarantube
 ```
 
-### How to change default Pharo image version 
+### How to change default Pharo image version
 
-By default, Pharo 11.0 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 12.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
-docker build -t pharo120-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=120 .
-docker run --name my_pharo120 -d -p 5900:5900 -p 6901:6901 pharo120-vnc-supervisor
+docker build -t pharo130-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=130 .
+docker run --name my_pharo130 -d -p 5900:5900 -p 6901:6901 pharo130-vnc-supervisor
 ```
 
 ## Settings
