@@ -3,16 +3,16 @@ LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
 ## Install prerequisites and utilities
 RUN apt-get update && apt-get install -y \
-    libssl1.1 \
-    libaudio2 \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+  libssl1.1 \
+  libaudio2 \
+  unzip \
+  && rm -rf /var/lib/apt/lists/*
 
 # --------------------
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=110
+ARG PHARO_IMAGE_VERSION=120
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
@@ -21,12 +21,12 @@ ENV PHARO_START_SCRIPT=${PHARO_DEFAULT_IMAGE_DIR}/config/default-startup.st
 
 RUN mkdir pharo && cd pharo \
   && apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    unzip \
+  curl \
+  unzip \
   && curl https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
   && mv ../pharo /usr/local/bin/ \
   && apt-get remove -y \
-    unzip \
+  unzip \
   && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/usr/local/bin/pharo:${PATH}"
