@@ -69,11 +69,11 @@ docker run --rm -p 5900:5900 -p 6901:6901 \
 
 ### How to change default Pharo image version
 
-By default, Pharo 12.0 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 13.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
-docker build -t pharo130-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=130 .
-docker run --name my_pharo130 -d -p 5900:5900 -p 6901:6901 pharo130-vnc-supervisor
+docker build -t pharo140-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=140 .
+docker run --name my_pharo140 -d -p 5900:5900 -p 6901:6901 pharo140-vnc-supervisor
 ```
 
 ## Settings
