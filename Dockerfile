@@ -7,19 +7,11 @@ RUN apt-get update && apt-get install -y \
   unzip \
   && rm -rf /var/lib/apt/lists/*
 
-## OpenSSL
-# The Pharo VM requires OpenSSL 1.1.0g, which is not available in the default Ubuntu 22.04 repositories.
-# The following commands download and install the required version of OpenSSL.
-# Note: This is a workaround and may not be the best practice for production environments.
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
-  dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
-  rm libssl1.1_1.1.0g-2ubuntu4_amd64.deb
-
 # --------------------
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=120
+ARG PHARO_IMAGE_VERSION=130
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
