@@ -1,40 +1,29 @@
 FROM mumez/ubuntu-vnc-supervisor
 LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
-## Install prerequisites and utilities
-RUN apt-get update && apt-get install -y \
-  libaudio2 \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
-
-## OpenSSL
-# The Pharo VM requires OpenSSL 1.1.0g, which is not available in the default Ubuntu 22.04 repositories.
-# The following commands download and install the required version of OpenSSL.
-# Note: This is a workaround and may not be the best practice for production environments.
-RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
-  dpkg -i libssl1.1_1.1.0g-2ubuntu4_amd64.deb && \
-  rm libssl1.1_1.1.0g-2ubuntu4_amd64.deb
-
 # --------------------
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=120
+ARG PHARO_IMAGE_VERSION=130
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
 ENV PHARO_HOME=${PHARO_DEFAULT_IMAGE_DIR}
 ENV PHARO_START_SCRIPT=${PHARO_DEFAULT_IMAGE_DIR}/config/default-startup.st
 
-RUN mkdir pharo && cd pharo \
-  && apt-get update && apt-get install -y --no-install-recommends \
+## Single RUN: install deps + Pharo, then purge apt cache and temp tools
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  libaudio2 \
+  unzip \
   curl \
-  unzip \
-  && curl https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
+  && mkdir pharo && cd pharo \
+  && curl -fsSL https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
   && mv ../pharo /usr/local/bin/ \
-  && apt-get remove -y \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get purge -y --auto-remove unzip \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache
 
 ENV PATH="/usr/local/bin/pharo:${PATH}"
 
