@@ -4,7 +4,7 @@ ORIGDIR=`pwd`
 BASEDIR=/usr/local/bin/pharo
 PHARO_CHANGE=${PHARO_IMAGE%.image}.changes
 
-if [ -e /root/data/$PHATO_IMAGE ]; then
+if [ -e /root/data/$PHARO_IMAGE ]; then
   BASEDIR=/root/data
 fi
 
@@ -16,7 +16,7 @@ cp -f $BASEDIR/$PHARO_CHANGE $BLDDIR
 cd $BLDDIR
 
 if [ $# -lt 2 ]; then
-  echo "Usage: save-pharo.sh {get|config} command params" 1>&2
+  echo "Usage: save-pharo.sh {metacello|config} command params" 1>&2
   exit 1
 fi
 
