@@ -1,2 +1,2 @@
-"For supressing lost-changes-recovery dialog on start-up"
+"For suppressing lost-changes-recovery dialog on start-up"
 EpLostChangesDetector enabled: false.

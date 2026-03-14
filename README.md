@@ -28,10 +28,10 @@ docker run --name my_pharo -d -p 5900:5900 -p 6901:6901 \
 	mumez/pharo-vnc-supervisor
 ```
 
-**Note for Windows (Git Bash / MSYS):** The colon in `:/root/data` can be mangled by the shell, so the host directory may not mount correctly. Use one of these:
-
-- Prevent path conversion: `MSYS_NO_PATHCONV=1 docker run ... -v /c/Users/YourUser/docker/pharo/data:/root/data ...`
-- Or use a Windows-style path: `-v C:/Users/YourUser/docker/pharo/data:/root/data`
+> **Note for Windows (Git Bash / MSYS):** The colon in `:/root/data` can be mangled by the shell, so the host directory may not mount correctly. Use one of these:
+>
+> - Prevent path conversion: `MSYS_NO_PATHCONV=1 docker run ... -v /c/Users/YourUser/docker/pharo/data:/root/data ...`
+> - Or use a Windows-style path: `-v C:/Users/YourUser/docker/pharo/data:/root/data`
 
 ### How to build a customized Pharo image in a container
 
@@ -42,12 +42,12 @@ You can use `save-pharo` command to build a customized Pharo image.
 `save-pharo metacello <metacello command-line arguments>`
 
 ```bash
-REPOS_URL=github://mumez/Tarantalk/repository
+REPOS_URL=github://mumez/PharoSmalltalkInteropServer:main/src
 # On Windows (Git Bash), use: MSYS_NO_PATHCONV=1 docker run ... -v /c/Users/ume/docker/pharo/data:/root/data ...
 docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
-	save-pharo metacello install $REPOS_URL BaselineOfTarantalk
+	save-pharo metacello install $REPOS_URL BaselineOfPharoSmalltalkInteropServer
 ```
 
 #### Install by Configuration
