@@ -1,12 +1,6 @@
 FROM mumez/ubuntu-vnc-supervisor
 LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 
-## Install prerequisites and utilities
-RUN apt-get update && apt-get install -y \
-  libaudio2 \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
-
 # --------------------
 # Pharo
 # --------------------
@@ -18,15 +12,18 @@ ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
 ENV PHARO_HOME=${PHARO_DEFAULT_IMAGE_DIR}
 ENV PHARO_START_SCRIPT=${PHARO_DEFAULT_IMAGE_DIR}/config/default-startup.st
 
-RUN mkdir pharo && cd pharo \
-  && apt-get update && apt-get install -y --no-install-recommends \
+## Single RUN: install deps + Pharo, then purge apt cache and temp tools
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  libaudio2 \
+  unzip \
   curl \
-  unzip \
-  && curl https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
+  && mkdir pharo && cd pharo \
+  && curl -fsSL https://get.pharo.org/64/${PHARO_IMAGE_VERSION}+vm | bash \
   && mv ../pharo /usr/local/bin/ \
-  && apt-get remove -y \
-  unzip \
-  && rm -rf /var/lib/apt/lists/*
+  && apt-get purge -y --auto-remove unzip \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache
 
 ENV PATH="/usr/local/bin/pharo:${PATH}"
 
