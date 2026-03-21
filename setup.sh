@@ -8,6 +8,8 @@ fi
 # supervisor log file
 mkdir -p $PHARO_HOME/logs && touch $PHARO_HOME/logs/$PHARO_SUPERVISOR_LOG_NAME
 
-# start base environments
-/usr/local/bin/setup-envs-all.sh &
-sleep 2
+# start base environments (skip in headless mode)
+if [ "$PHARO_MODE" != "headless" ]; then
+    /usr/local/bin/setup-envs-all.sh &
+    sleep 2
+fi

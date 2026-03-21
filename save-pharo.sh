@@ -22,7 +22,11 @@ fi
 
 echo "## Pharo starts: $@"
 
-pharo-ui $PHARO_IMAGE ${@:1}
+if [ "$PHARO_MODE" == "headless" ]; then
+    pharo -vm-display-null $PHARO_IMAGE ${@:1}
+else
+    pharo-ui $PHARO_IMAGE ${@:1}
+fi
 
 cp -f $PHARO_IMAGE /root/data/$PHARO_IMAGE
 cp -f $PHARO_CHANGE /root/data/$PHARO_CHANGE
