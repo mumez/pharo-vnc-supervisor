@@ -47,28 +47,38 @@ REPOS_URL=github://mumez/PharoSmalltalkInteropServer:main/src
 docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
 	mumez/pharo-vnc-supervisor \
-	save-pharo metacello install $REPOS_URL BaselineOfPharoSmalltalkInteropServer
+	save-pharo metacello install $REPOS_URL PharoSmalltalkInteropServer
 ```
 
-#### Install by Configuration
+> **Note:** Pharo 14 takes the project name _without_ the `BaselineOf` prefix
+> (`PharoSmalltalkInteropServer`). Pharo 13 and earlier expect the full baseline
+> name (`BaselineOfPharoSmalltalkInteropServer`).
+
+#### Install by Configuration (Obsolete)
 
 `save-pharo config <Metacello configuration>`
+
+> **Obsolete:** The `config` command line handler only works with **Pharo 12 and
+> earlier** (deprecated since 12, removed in Pharo 13). It no longer works with the
+> current default image, but is kept here for reference when running older tagged
+> images (e.g. `pharo120`, `pharo110`, `pharo100`) from
+> [Docker Hub](https://hub.docker.com/r/mumez/pharo-vnc-supervisor/tags).
 
 ```bash
 docker run --rm -p 5900:5900 -p 6901:6901 \
 	-v=$HOME/docker/pharo/data:/root/data \
-	mumez/pharo-vnc-supervisor \
+	mumez/pharo-vnc-supervisor:pharo120 \
 	save-pharo config http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main/ \
 	ConfigurationOfNeo4reSt --install=stable
 ```
 
 ### How to change default Pharo image version
 
-By default, Pharo 13.0 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 14.0 will be installed to the docker image. You can specify other versions when building a docker image.
 
 ```bash
-docker build -t pharo140-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=140 .
-docker run --name my_pharo140 -d -p 5900:5900 -p 6901:6901 pharo140-vnc-supervisor
+docker build -t pharo150-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=150 .
+docker run --name my_pharo150 -d -p 5900:5900 -p 6901:6901 pharo150-vnc-supervisor
 ```
 
 ## Settings

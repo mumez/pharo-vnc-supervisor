@@ -5,7 +5,7 @@ LABEL maintainer="Masashi Umezawa <ume@softumeya.com>"
 # Pharo
 # --------------------
 ENV DISPLAY=:0 
-ARG PHARO_IMAGE_VERSION=130
+ARG PHARO_IMAGE_VERSION=140
 ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
