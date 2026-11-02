@@ -16,7 +16,7 @@ cp -f $BASEDIR/$PHARO_CHANGE $BLDDIR
 cd $BLDDIR
 
 if [ $# -lt 2 ]; then
-  echo "Usage: save-pharo.sh {metacello|config} command params" 1>&2
+  echo "Usage: save-pharo.sh <pharo-subcommand> command params (e.g. metacello install <repo> <project>)" 1>&2
   exit 1
 fi
 

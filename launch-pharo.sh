@@ -6,18 +6,19 @@ echo "PHARO_IMAGE: $PHARO_IMAGE"
 echo "PHARO_START_SCRIPT: '$PHARO_START_SCRIPT'"
 
 # Launch Pharo
+# Note: the 'st' command evaluates the script file and keeps the image running.
 if [ "$PHARO_MODE" == "gui" ]; then
     echo "Launch Pharo in GUI mode"
     if [ -z "$PHARO_START_SCRIPT" ]; then
         pharo-ui $PHARO_IMAGE
     else
-        pharo-ui $PHARO_IMAGE -e "$PHARO_START_SCRIPT"
+        pharo-ui $PHARO_IMAGE st "$PHARO_START_SCRIPT"
     fi
 else
     echo "Launch Pharo in non-gui mode"
     if [ -z "$PHARO_START_SCRIPT" ]; then
-        pharo -vm-display-null $PHARO_IMAGE --no-quit
+        pharo -vm-display-null $PHARO_IMAGE eval --no-quit nil
     else
-        pharo -vm-display-null $PHARO_IMAGE --no-quit -e "$PHARO_START_SCRIPT"
+        pharo -vm-display-null $PHARO_IMAGE st "$PHARO_START_SCRIPT"
     fi
 fi
