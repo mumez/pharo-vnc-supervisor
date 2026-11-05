@@ -20,12 +20,29 @@ if [ $# -lt 2 ]; then
   exit 1
 fi
 
+# a log left by a previous run must not be taken for a failure of this run
+rm -f PharoDebug.log
+
 echo "## Pharo starts: $@"
 
 if [ "$PHARO_MODE" == "headless" ]; then
-    pharo -vm-display-null $PHARO_IMAGE ${@:1}
+    timeout ${PHARO_SAVE_TIMEOUT:-120} pharo -vm-display-null $PHARO_IMAGE ${@:1}
 else
     pharo-ui $PHARO_IMAGE ${@:1}
+fi
+PHARO_STATUS=$?
+
+if [ $PHARO_STATUS -ne 0 ] || [ -e PharoDebug.log ]; then
+  if [ "$PHARO_MODE" == "headless" ] && [ $PHARO_STATUS -eq 124 ]; then
+    echo "## Pharo timed out after ${PHARO_SAVE_TIMEOUT:-120} (PHARO_SAVE_TIMEOUT)." 1>&2
+  fi
+  echo "## FAILED! Pharo exit status: $PHARO_STATUS. Image was not saved." 1>&2
+  if [ -e PharoDebug.log ]; then
+    cp -f PharoDebug.log /root/data/PharoDebug-save-pharo.log
+    echo "## See error log: /root/data/PharoDebug-save-pharo.log" 1>&2
+  fi
+  cd $ORIGDIR
+  exit 1
 fi
 
 cp -f $PHARO_IMAGE /root/data/$PHARO_IMAGE
