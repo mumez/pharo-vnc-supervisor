@@ -72,6 +72,14 @@ docker run --rm -p 5900:5900 -p 6901:6901 \
 	ConfigurationOfNeo4reSt --install=stable
 ```
 
+#### Exit status
+
+`save-pharo` exits with `1` if Pharo returns a non-zero status or writes a `PharoDebug.log`. In that case the image in `/root/data` is left unchanged, and the log is saved as `/root/data/PharoDebug-save-pharo.log`.
+
+In headless mode, `save-pharo` also fails if Pharo does not finish within `PHARO_SAVE_TIMEOUT` (default: `120` seconds). Set a longer value for large projects, such as `-e PHARO_SAVE_TIMEOUT=600`, or `0` to disable the timeout.
+
+> **Note:** In GUI mode (the default), Pharo stays open after the command finishes, so `save-pharo` does not exit until you quit Pharo, and `PHARO_SAVE_TIMEOUT` is not applied. Use `-e PHARO_MODE=headless` for unattended builds such as CI.
+
 ### How to change default Pharo image version
 
 By default, Pharo 14.0 will be installed to the docker image. You can specify other versions when building a docker image.
