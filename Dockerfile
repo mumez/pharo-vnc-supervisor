@@ -10,7 +10,7 @@ ENV PHARO_MODE='gui'
 ENV PHARO_IMAGE='Pharo.image'
 ARG PHARO_DEFAULT_IMAGE_DIR='/root/data'
 ENV PHARO_HOME=${PHARO_DEFAULT_IMAGE_DIR}
-ENV PHARO_START_SCRIPT=${PHARO_DEFAULT_IMAGE_DIR}/config/default-startup.st
+ENV PHARO_START_SCRIPT=/usr/local/etc/pharo/default-startup.st
 
 ## Single RUN: install deps + Pharo, then purge apt cache and temp tools
 RUN apt-get update \
@@ -36,13 +36,15 @@ ADD ./setup.sh /usr/local/bin/
 ADD ./docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*
 
+# Kept outside the data volume, so that mounting /root/data does not hide it
+ADD ./config/default-startup.st /usr/local/etc/pharo/
+
 # --------------------
 # Workspace
 # --------------------
 WORKDIR ${PHARO_DEFAULT_IMAGE_DIR}
 
 RUN cp /usr/local/bin/pharo/Pharo*.* ${PHARO_DEFAULT_IMAGE_DIR}
-ADD ./config/default-startup.st ${PHARO_DEFAULT_IMAGE_DIR}/config/
 
 VOLUME ${PHARO_DEFAULT_IMAGE_DIR}
 

@@ -5,6 +5,11 @@ echo "PHARO_MODE: $PHARO_MODE"
 echo "PHARO_IMAGE: $PHARO_IMAGE"
 echo "PHARO_START_SCRIPT: '$PHARO_START_SCRIPT'"
 
+if [ -n "$PHARO_START_SCRIPT" ] && [ ! -f "$PHARO_START_SCRIPT" ]; then
+    echo "ERROR: PHARO_START_SCRIPT not found: '$PHARO_START_SCRIPT'" 1>&2
+    exit 1
+fi
+
 # Launch Pharo
 # Note: the 'st' command evaluates the script file and keeps the image running.
 if [ "$PHARO_MODE" == "gui" ]; then

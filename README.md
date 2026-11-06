@@ -98,9 +98,11 @@ You can change these settings via `docker run` `-e` option.
 ```bash
 PHARO_SUPERVISOR_LOG_NAME=pharo-supervisord.log
 PHARO_IMAGE=Pharo.image
-PHARO_START_SCRIPT=
+PHARO_START_SCRIPT=/usr/local/etc/pharo/default-startup.st
 PHARO_MODE=gui
 ```
+
+`PHARO_START_SCRIPT` is the script evaluated when Pharo starts. Set it to an empty value to start without a script. If the specified file does not exist, Pharo does not start and the error is written to `logs/pharo-supervisord.log` in the data directory.
 
 ### VNC related environment variables
 
