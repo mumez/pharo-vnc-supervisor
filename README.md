@@ -17,6 +17,20 @@ You can access the running pharo image via VNC client or web browser.
 - VNC client: `yourhost:5900`
 - Web browser: `http://yourhost:6901/?password=vncpassword`
 
+### Running on ARM64 hosts (Apple Silicon, etc.)
+
+The image is published for `linux/amd64` only, because Pharo 14 needs Pharo VM 10.3.9 or later, and no Linux aarch64 build of that VM is published yet. On ARM64 hosts, add `--platform linux/amd64` to run it under emulation (Rosetta on Docker Desktop for Mac). It runs slower than it would natively.
+
+```bash
+docker run --platform linux/amd64 --name my_pharo -d -p 5900:5900 -p 6901:6901 mumez/pharo-vnc-supervisor
+```
+
+Building locally needs the same option. Without it, the build fails with `no match for platform in manifest`.
+
+```bash
+docker build --platform linux/amd64 -t pharo-vnc-supervisor .
+```
+
 ### How to start with a customized Pharo image
 
 1. Place your customized Pharo image to your docker-host data directory (For example, `$HOME/docker/pharo/data`).
@@ -82,7 +96,7 @@ In headless mode, `save-pharo` also fails if Pharo does not finish within `PHARO
 
 ### How to change default Pharo image version
 
-By default, Pharo 14.0 will be installed to the docker image. You can specify other versions when building a docker image.
+By default, Pharo 14.0 will be installed to the docker image. You can specify other versions when building a docker image. (On ARM64 hosts, add `--platform linux/amd64` as well.)
 
 ```bash
 docker build -t pharo150-vnc-supervisor --build-arg PHARO_IMAGE_VERSION=150 .
